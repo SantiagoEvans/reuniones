@@ -21,3 +21,4 @@ public class PersonaRestController {
         return personaService.getAllPersonas();
     }
 }
+
