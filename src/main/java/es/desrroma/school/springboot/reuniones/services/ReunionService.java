@@ -20,4 +20,9 @@ public class ReunionService {
         return reunionRepository.findAll();
     }
 
+    public Reunion getById(long idReunion) {
+        return reunionRepository.findById(idReunion)
+                .orElseThrow(() -> new RuntimeException("Reunion not found with id: " + idReunion));        
+    }
+
 }

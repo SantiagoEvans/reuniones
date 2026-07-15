@@ -20,4 +20,9 @@ public class PersonaService {
         return personaRepository.findAll();
     }
 
+    public Persona getById(long idAsistente) {
+        return personaRepository.findById(idAsistente)
+                .orElseThrow(() -> new RuntimeException("Persona not found with id: " + idAsistente));
+    }
+
 }
