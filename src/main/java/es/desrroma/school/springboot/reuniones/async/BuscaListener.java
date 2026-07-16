@@ -1,5 +1,7 @@
 package es.desrroma.school.springboot.reuniones.async;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -29,10 +31,13 @@ public class BuscaListener {
         try {
             InfoBusca infoBusca = objectMapper.readValue(message, InfoBusca.class);
             logger.info("Received message: {}", infoBusca);
-            Persona persona = personaService.getById(infoBusca.getIdAsistente());
-            Reunion reunion = reunionService.getById(infoBusca.getIdReunion());
-            logger.info("{} {} Tiene una reunion a las: {}", persona.getNombre(), persona.getApellidos(), reunion.getFecha());
-
+            Optional<Persona> persona = personaService.getById(infoBusca.getIdAsistente());
+            Optional<Reunion> reunion = reunionService.getById(infoBusca.getIdReunion());
+            if (persona.isPresent() && reunion.isPresent()) {
+                logger.info("{} {} Tiene una reunion a las: {}", persona.get().getNombre(), persona.get().getApellidos(), reunion.get().getFecha());
+            } else {
+                logger.warn("Persona or Reunion not found for message: {}", infoBusca);
+            }
         } catch (Exception e) {
             logger.error("Error processing message: {}", message, e);
         }

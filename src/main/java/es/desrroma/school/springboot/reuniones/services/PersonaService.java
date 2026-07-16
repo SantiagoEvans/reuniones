@@ -1,6 +1,7 @@
 package es.desrroma.school.springboot.reuniones.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,8 @@ public class PersonaService {
         return personaRepository.findAll();
     }
 
-    public Persona getById(long idAsistente) {
-        return personaRepository.findById(idAsistente)
-                .orElseThrow(() -> new RuntimeException("Persona not found with id: " + idAsistente));
+    public Optional<Persona> getById(long idAsistente) {
+        return personaRepository.findById(idAsistente);
     }
 
 }

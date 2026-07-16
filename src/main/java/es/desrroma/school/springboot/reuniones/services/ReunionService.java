@@ -1,6 +1,7 @@
 package es.desrroma.school.springboot.reuniones.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,8 @@ public class ReunionService {
         return reunionRepository.findAll();
     }
 
-    public Reunion getById(long idReunion) {
-        return reunionRepository.findById(idReunion)
-                .orElseThrow(() -> new RuntimeException("Reunion not found with id: " + idReunion));        
+    public Optional<Reunion> getById(long idReunion) {
+        return reunionRepository.findById(idReunion);     
     }
 
 }

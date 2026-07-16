@@ -13,6 +13,16 @@ logging:
           datasource: 
             init:
               ScriptUtils: "debug"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: when_authorized
+
 ---
 spring:
   config:
