@@ -19,8 +19,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/api/*").hasRole("API_USER")
-                .requestMatchers("/*").authenticated()
+                // 1. Rutas específicas de la API REST que requieren un rol específico
+                .requestMatchers("/api/rest/**").hasRole("API_USER")
+                
+                // 2. Rutas del Actuator y la raíz del sitio
+                .requestMatchers("/", "/actuator/**").permitAll() 
+                
+                // 3. Cualquier otra ruta de la aplicación requiere autenticación
+                .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
