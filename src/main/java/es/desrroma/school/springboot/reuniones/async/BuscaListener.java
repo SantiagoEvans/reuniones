@@ -8,6 +8,7 @@ import es.desrroma.school.springboot.reuniones.models.Persona;
 import es.desrroma.school.springboot.reuniones.models.Reunion;
 import es.desrroma.school.springboot.reuniones.services.PersonaService;
 import es.desrroma.school.springboot.reuniones.services.ReunionService;
+import es.desrroma.school.springboot.reuniones.async.InfoBusca;
 import tools.jackson.databind.ObjectMapper;
 
 @Component
